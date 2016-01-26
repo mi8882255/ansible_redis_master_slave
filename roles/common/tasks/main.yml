@@ -1,16 +1,15 @@
 ---
 - name: Install development tools
-  yum: name="@Development tools" state=present 
+  apt: name=build-essential state=present 
 
 - name: Ensure required packages are installed
-  yum: name={{ item }} state=present
+  apt: name={{ item }} state=present
   with_items:
     - ruby
-    - rubygems
     - vim
 
-- name: Place the redis.conf file on all hosts
-  copy: src=redis.conf dest=/etc/redis.conf
+#- name: Place the redis.conf file on all hosts
+#  copy: src=redis.conf dest=/etc/redis.conf
 
 - name: Ensure /var/log/redis/ exists
   file: path=/var/log/redis owner=root group=root mode=0655 state=directory
@@ -27,11 +26,11 @@
 - name: Make install redis bins
   shell: make install chdir=/root/redis-3.0.0/
 
-- name: Open up port 6379 on iptables
-  shell: iptables -I INPUT -p tcp --dport 6379 -j ACCEPT; service iptables save; service iptables reload
+#- name: Open up port 6379 on iptables
+#  shell: iptables -I INPUT -p tcp --dport 6379 -j ACCEPT; service iptables save; service iptables reload
+#
+#- name: Open up port 16379 on iptables
+#  shell: iptables -I INPUT -p tcp --dport 16379 -j ACCEPT; service iptables save; service iptables reload
 
-- name: Open up port 16379 on iptables
-  shell: iptables -I INPUT -p tcp --dport 16379 -j ACCEPT; service iptables save; service iptables reload
-
-- name: Start redis
-  command: redis-server /etc/redis.conf
+#- name: Start redis
+#  command: redis-server /etc/redis.conf

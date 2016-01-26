@@ -1,0 +1,14 @@
+---
+- name: Configure common things
+  hosts: slave
+  user: root
+  tasks:
+    - name: Kill redis-server
+      shell: pkill redis-server
+
+    - name: copy to server master config
+      template: src=roles/master/templates/redis.conf.j2 dest=/etc/redis.conf
+
+    - name: Start redis
+      shell: bash /root/startredis.sh
+

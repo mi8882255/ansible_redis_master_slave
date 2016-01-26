@@ -1,21 +1,12 @@
 ---
 - name: Configure common things
-  hosts: all
+  hosts: slave
   tags: 
     - prepare
   user: root
 #  sudo: yes
   roles:
     - roles/common
-
-- name: Configure master node
-  hosts: master
-  user: root
-  tags: 
-    - master
-#  sudo: yes
-  roles:
-    - roles/master
 
 - name: Configure slave node
   hosts: slave
