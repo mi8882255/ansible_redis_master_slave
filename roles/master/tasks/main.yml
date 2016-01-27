@@ -15,4 +15,5 @@
   template: src=redis.conf.j2 dest=/etc/redis.conf
 
 - name: Start redis
-  shell: bash /root/startredis.sh
+  shell: service redis-server start
+#  shell: bash /root/startredis.sh
