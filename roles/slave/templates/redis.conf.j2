@@ -1,12 +1,12 @@
-daemonize no
+daemonize yes
 bind 0.0.0.0
-pidfile /var/run/redis.pid
+pidfile /var/run/redis/redis-server.pid
 port 6379
 tcp-backlog 511
 timeout 0
 tcp-keepalive 0
 loglevel notice
-logfile ""
+logfile /var/log/redis.log
 databases 16
 
 slaveof {{master_host}} 6379
@@ -23,7 +23,7 @@ rdbchecksum yes
 
 dbfilename dump.rdb
 
-dir ./
+dir /var/lib/redis/
 
 slave-serve-stale-data yes
 
