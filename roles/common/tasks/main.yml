@@ -26,7 +26,7 @@
 - name: Make install redis bins
   shell: make install chdir=/root/redis-3.0.0/
 
-- name: Place the redis.conf file on all hosts
+- name: copy init.d script
   copy: src=redis-server dest=/etc/init.d/redis-server mode=755
   shell: update-rc.d redis-server start 80 2 3 4 5 . stop 20 0 1 6 .
 
